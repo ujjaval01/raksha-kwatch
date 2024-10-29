@@ -7,7 +7,7 @@ use Twilio\Rest\Client;
 
 // Twilio credentials
 $account_sid = 'ACe71c6b10e61c7f60ab035927786ef93b';
-$auth_token = '9ef4d0efcc646b680278a600241c2f91';
+$auth_token = 'c4e37383743a4365f1f11c0a6fb2c4f2';
 $twilio_number = '+18434201085'; // Twilio phone number in E.164 format
 
 // Check if user is logged in
@@ -44,7 +44,7 @@ while ($row = $result->fetch_assoc()) {
             $formatted_phone_number, // Guardian's phone number with country code
             [
                 'from' => $twilio_number,
-                'body' => "SOS Alert! Your ward may be in an emergency. Please check immediately."
+                'body' => "SOS Alert! Koi Apke Relative Ki Gaand Maar Rha Hai, Bcha Lo Usko Jldi."
             ]
         );
         $message_status[] = "SOS Alert sent successfully to $formatted_phone_number.";

@@ -20,7 +20,7 @@
             margin-bottom: 30px;
         }
         .title-banner {
-            background-color:#343a40; /* Background color for the title */
+            background-color:#343a40;
             color: white;
             padding: 20px;
             border-radius: 10px;
@@ -51,11 +51,22 @@
             border-radius: 15px;
             margin-top: 3px;
         }
-        .future-scope img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 20px;
+        .image-container {
+            width: 100%;
+            height: 400px; /* Set desired height */
+            overflow: hidden;
+            position: relative;
             border-radius: 15px;
+            margin-top: 20px;
+        }
+        .image-container img {
+            width: 100vw; /* Extend image width beyond container */
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); /* Center image */
         }
         .btn-primary, .btn-success, .btn-danger {
             border-radius: 20px;
@@ -98,8 +109,12 @@
             </div>
         </div>
     </div>
-    <img src="./images/womens-safety.jpg" alt="Future Scope Image">
-    <br>
+
+    <!-- Responsive Image Container -->
+    <div class="image-container">
+        <img src="./images/womens-safety.jpg" alt="Future Scope Image">
+    </div>
+
     <br>
     <h2>About the Application</h2>
     <p>The Women Safety System is designed to empower women by providing them with a secure platform to submit complaints and manage their safety. It connects users with the relevant authorities, ensuring timely responses to incidents.</p>
@@ -113,7 +128,6 @@
             <li>Integration with local law enforcement databases</li>
             <li>Mobile app development for better accessibility</li>
         </ul>
-        
     </div>
 </div>
 
@@ -122,7 +136,7 @@
         <p>&copy; 2024 Women Safety System. All Rights Reserved.</p>
         <p>Developed by: Ujjaval Saini</p>
         <p>Contact: sainiujvl@gmail.com</p>
-        <a href="about.php">About of Application or Developer</a>
+        <a href="about.php">About the Application or Developer</a>
     </div>
 </footer>
 
