@@ -6,11 +6,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Check if user_name is set in the session
-if (isset($_SESSION['user_name'])) {
-    $userName = $_SESSION['user_name'];
-} else {
-    $userName = "Guest"; // Fallback if the name is not set
-}
+$userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : "Guest"; // Fallback if the name is not set
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +20,8 @@ if (isset($_SESSION['user_name'])) {
     
     <style>
         body {
-            background-color: #f8f9fa;
+            background: url('../images/abstract.avif') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             min-height: 100vh;
             flex-direction: column;
@@ -35,6 +32,7 @@ if (isset($_SESSION['user_name'])) {
             position: fixed;
             background-color: #343a40;
             padding-top: 30px;
+            transition: width 0.3s ease;
         }
         .sidebar a {
             color: white;
@@ -43,58 +41,64 @@ if (isset($_SESSION['user_name'])) {
             display: block;
             margin: 10px 0;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .sidebar a:hover {
             background-color: #495057;
+            transform: translateX(5px);
         }
         .content {
             margin-left: 260px;
             padding: 20px;
+            transition: margin-left 0.3s ease;
         }
         .header {
-            background-color: #007bff;
+            background-color: rgba(0, 123, 255, 0.8);
             color: white;
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
             text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         .card {
             margin: 20px;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        .card-body {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
         }
         .btn-custom {
             background-color: #28a745;
             color: white;
+            transition: background-color 0.3s ease;
         }
         .btn-custom:hover {
             background-color: #218838;
         }
-
-        body {
-        background: url('../images/abstract.avif') no-repeat center center fixed;
-        background-size: cover;
-        display: flex;
-        min-height: 100vh;
-        flex-direction: column;
-}
     </style>
 </head>
 <body>
     <div class="sidebar">
         <h2 class="text-center text-white">Dashboard</h2>
         <a href="submit_complaint.php"><i class="fas fa-file-alt"></i> Submit Complaint</a>
-        <a href="add_guardian.php"><i class="fas fa-user-plus"></i> Add Guardian</a>
+        <!-- <a href="add_guardian.php"><i class="fas fa-user-plus"></i> Add Guardian</a> -->
+        <a href="manage_guardians.php"><i class="fas fa-user-plus"></i> Manage Guardian</a>
         <a href="view_complaint_status.php"><i class="fas fa-eye"></i> View Complaint Status</a>
-        <a href="profile.php"><i class="fas fa-user"></i> Manage Profile</a>
+        <a href="manage_profile.php"><i class="fas fa-user"></i> Manage Profile</a>
         <a href="sos_button.php" class="btn btn-danger text-left"><i class="fas fa-exclamation-triangle"></i> Emergency SOS</a>
         <a href="feedback.html"><i class="fas fa-comments"></i> Feedback</a>
-
+        <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <!-- <a href="logout.php"><span class="sidebar-icon"></span> Logout</a> -->
     </div>
 
     <div class="content">
@@ -133,7 +137,7 @@ if (isset($_SESSION['user_name'])) {
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title">Feedback</h5>
-                        <p class="card-text">Submit a feedback.</p>
+                        <p class="card-text">Submit your feedback.</p>
                         <a href="feedback.html" class="btn btn-custom">Feedback</a>
                     </div>
                 </div>

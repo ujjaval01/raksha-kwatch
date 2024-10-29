@@ -7,7 +7,7 @@ use Twilio\Rest\Client;
 
 // Twilio credentials
 $account_sid = 'ACe71c6b10e61c7f60ab035927786ef93b';
-$auth_token = 'c4e37383743a4365f1f11c0a6fb2c4f2';
+$auth_token = '72a30f1cc6c12b7b6bc3b98731e10764';
 $twilio_number = '+18434201085'; // Twilio phone number in E.164 format
 
 // Check if user is logged in

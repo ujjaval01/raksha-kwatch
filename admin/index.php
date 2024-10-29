@@ -97,10 +97,11 @@ if (!isset($_SESSION['admin_logged_in'])) {
 </head>
 <body>
     <div class="sidebar">
-        <h2>Admin Dashboard</h2>
+        <h2>Dashboard</h2>
         <a href="view_complaint.php"><span class="sidebar-icon">📄</span> View Complaints</a>
         <a href="manage_police.php"><span class="sidebar-icon">👮</span> Manage Police</a>
         <a href="manage_user.php"><span class="sidebar-icon">👥</span> Manage Users</a>
+        <a href="../user/manage_guardians.php"><span class="sidebar-icon">🙎‍♂️</span>Manage Guardian</a>
         <a href="logout.php"><span class="sidebar-icon">🚪</span> Logout</a>
     </div>
     <div class="content">

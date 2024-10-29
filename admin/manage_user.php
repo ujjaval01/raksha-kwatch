@@ -136,11 +136,11 @@ $users = $conn->query("SELECT * FROM users")->fetch_all(MYSQLI_ASSOC); // Fetch 
     </table>
 </div>
 
-<footer class="footer">
+<!-- <footer class="footer">
     <div class="container">
         <span>&copy; 2024 Women Safety System | All Rights Reserved</span>
     </div>
-</footer>
+</footer> -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

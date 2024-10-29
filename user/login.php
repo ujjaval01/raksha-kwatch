@@ -33,17 +33,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+    .no-underline {
+        text-decoration: none; /* Remove underline */
+    }
+</style>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css"> <!-- Link to custom CSS -->
 </head>
 <body>
+
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title text-center">User Login</h2>
+
+                        <!-- Success message for successful registration -->
+                        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+                            <div class="alert alert-success text-center">
+                                Registration successful! You can now log in.
+                            </div>
+                        <?php endif; ?>
+
                         <form method="POST" action="login.php" class="mt-4">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
@@ -52,7 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                <a href="forgot_password.php" class="no-underline">Forgot password</a>
+                                
                             </div>
+
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form>
                         <p class="text-center mt-3">

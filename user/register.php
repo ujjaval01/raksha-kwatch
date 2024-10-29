@@ -1,19 +1,62 @@
 <?php
-include '../config.php'; // Assuming the config.php is correctly located
+session_start();
+require '../config.php'; // Database configuration
+require 'C:\xampp\htdocs\women_safety_system\vendor\phpmailer\phpmailer\src\PHPMailer.php';
+require 'C:\xampp\htdocs\women_safety_system\vendor\phpmailer\phpmailer\src\SMTP.php';
+require 'C:\xampp\htdocs\women_safety_system\vendor\phpmailer\phpmailer\src\Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+$error_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $phone_number = $_POST['phone_number'];
+    $otp = rand(100000, 999999);
 
-    $stmt = $conn->prepare("INSERT INTO users (name, email, password, phone_number) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $name, $email, $password, $phone_number);
+    // Check if the email already exists in the database
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($stmt->execute()) {
-        echo "<div class='alert alert-success'>Registration successful!</div>";
+    if ($result->num_rows > 0) {
+        $error_message = "Email already registered.";
     } else {
-        echo "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
+        // If email does not exist, proceed to send OTP and register
+        $_SESSION['name'] = $name;
+        $_SESSION['email'] = $email;
+        $_SESSION['password'] = $password;
+        $_SESSION['phone_number'] = $phone_number;
+        $_SESSION['otp'] = $otp;
+
+        // Send OTP email using PHPMailer
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'sainiujvl@gmail.com';
+            $mail->Password = 'dkuq puzg hxuj uawm';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->setFrom('sainiujvl@gmail.com', 'Raksha Kawatch');
+            $mail->addAddress($email);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Your OTP Code';
+            $mail->Body = "Hello $name,<br> welcome to <b>Rasha Kawatch</b>, A Women Safety & Security System. Your One-Time Password (OTP) for registration is:  <strong>$otp</strong>. This code is valid for 10 minutes. Please do not share this code with anyone. Stay safe.<br>Thanku for registration!";
+            $mail->send();
+
+            header("Location: verify_otp.php");
+            exit;
+        } catch (Exception $e) {
+            $error_message = "Error sending OTP. Please try again.";
+        }
     }
 }
 ?>
@@ -22,45 +65,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css"> <!-- Link to custom CSS -->
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow-lg p-4" style="width: 400px;">
-            <div class="card-body">
-                <h2 class="card-title text-center mb-4">User Registration</h2>
-                <form method="POST" action="register.php">
-                    <div class="form-group mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control rounded-pill" placeholder="Enter your name" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control rounded-pill" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control rounded-pill" placeholder="Create a password" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="phone_number" class="form-label">Phone Number</label>
-                        <input type="text" name="phone_number" class="form-control rounded-pill" placeholder="Enter your phone number" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100 rounded-pill btn-lg">Register</button>
-                </form>
-                <div class="text-center mt-3">
-                    <p>Already have an account? <a href="login.php" class="text-primary">Login here</a></p>
+            <h2 class="text-center mb-4">User Registration</h2>
+            <?php if ($error_message): ?>
+                <div class="alert alert-danger"><?= $error_message ?></div>
+            <?php endif; ?>
+            <form method="POST" action="register.php">
+                <div class="form-group mb-3">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control" required>
                 </div>
-            </div>
+                <div class="form-group mb-3">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone_number" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Register</button>
+            </form>
+            <p class="text-center mt-3">Already have an account? <a href="login.php">Login here</a>.
+                        </p>
         </div>
     </div>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
