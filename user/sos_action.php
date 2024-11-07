@@ -44,8 +44,10 @@ while ($row = $result->fetch_assoc()) {
             $formatted_phone_number, // Guardian's phone number with country code
             [
                 'from' => $twilio_number,
-                'body' => "SOS Alert! Koi Apke Relative Ki Gaand Maar Rha Hai, Bcha Lo Usko Jldi."
-            ]
+                // 'body' => "SOS Alert! Koi Apke Relative Ki Gaand Maar Rha Hai, Bcha Lo Usko Jldi."
+                 'body' => "Dear Ujjaval Saini, Your final year marksheet is being distributed in the college by 11:30 am on 05/11/2024. If it is not taken today then its will go back to the CCS University Meerut. POV: JVJC PRINCIPLE SRE."
+                    // 'body' => "प्रिय उज्ज्वल सैनी, आपकी अंतिम वर्ष की मार्कशीट 05/11/2024 को सुबह 11:30 बजे तक कॉलेज में वितरित की जा रही है, यदि इसे आज नहीं लिया जाता है तो यह सीसीएस विश्वविद्यालय मेरठ को वापस चली जाएगी। POV: JVJC PRINCIPLE SRE"
+                ]
         );
         $message_status[] = "SOS Alert sent successfully to $formatted_phone_number.";
         $success_count++;

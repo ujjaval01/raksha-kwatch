@@ -52,8 +52,12 @@ if (!isset($_SESSION['admin_logged_in'])) {
             transition: background-color 0.3s, color 0.3s;
         }
         .sidebar a:hover {
-            background-color: #495057;
-            color: white;
+            background-color:#007bff;
+            color: black;
+            transform: scale(1.17); 
+            transition: transform 0.4s ease; 
+
+
         }
         .sidebar-icon {
             font-size: 24px;
@@ -88,11 +92,21 @@ if (!isset($_SESSION['admin_logged_in'])) {
         .feature-card {
             text-align: center;
         }
+        /* img hover */
         .feature-card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 15px;
-        }
+        max-width: 100%;
+        height: auto;
+        border-radius: 15px;
+        transition: transform 0.4s ease; 
+    }
+
+    .feature-card img:hover {
+        transform: scale(1.02); 
+    }
+    .row :hover{
+        transform: scale(1.03);
+        transition: transform 0.4s ease;
+    }
     </style>
 </head>
 <body>
@@ -101,8 +115,8 @@ if (!isset($_SESSION['admin_logged_in'])) {
         <a href="view_complaint.php"><span class="sidebar-icon">📄</span> View Complaints</a>
         <a href="manage_police.php"><span class="sidebar-icon">👮</span> Manage Police</a>
         <a href="manage_user.php"><span class="sidebar-icon">👥</span> Manage Users</a>
-        <a href="../user/manage_guardians.php"><span class="sidebar-icon">🙎‍♂️</span>Manage Guardian</a>
-        <a href="logout.php"><span class="sidebar-icon">🚪</span> Logout</a>
+        <a href="manage_guardians.php"><span class="sidebar-icon">🙎‍♂️</span>Manage Guardian</a>
+        <a href="logout.php"><span class="sidebar-icon">↩️</span> Logout</a>
     </div>
     <div class="content">
         <nav class="navbar navbar-expand-lg">
@@ -117,34 +131,36 @@ if (!isset($_SESSION['admin_logged_in'])) {
         <p>Use the sidebar to navigate through the admin functionalities.</p>
 
         <div class="row">
-            <div class="col-md-4">
-                <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Complaints</h5>
-                        <p class="card-text">Manage and view all complaints submitted.</p>
-                        <a href="view_complaint.php" class="btn btn-light">View Complaints</a>
+                <div class="col-md-4">
+                    <div class="card text-white bg-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Complaints</h5>
+                            <p class="card-text">Manage and view all complaints submitted.</p>
+                            <a href="view_complaint.php" class="btn btn-light">View Complaints</a>
+                        </div>
+                    </div>
+                </div>
+             <div class="col-md-4">
+                   <div class="card text-white bg-success">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Police</h5>
+                            <p class="card-text">Oversee police officers and their assignments.</p>
+                            <a href="manage_police.php" class="btn btn-light">Manage Police</a>
+                     </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                 <div class="card text-white bg-warning">
+                        <div class="card-body">
+                            <h5 class="card-title">Manage Users</h5>
+                            <p class="card-text">Control user access and manage profiles.</p>
+                             <a href="manage_user.php" class="btn btn-light">Manage Users</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card text-white bg-success">
-                    <div class="card-body">
-                        <h5 class="card-title">Manage Police</h5>
-                        <p class="card-text">Oversee police officers and their assignments.</p>
-                        <a href="manage_police.php" class="btn btn-light">Manage Police</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-white bg-warning">
-                    <div class="card-body">
-                        <h5 class="card-title">Manage Users</h5>
-                        <p class="card-text">Control user access and manage profiles.</p>
-                        <a href="manage_user.php" class="btn btn-light">Manage Users</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        
 
         <div class="feature-section">
             <h2>Application Features</h2>

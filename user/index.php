@@ -6,20 +6,21 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Check if user_name is set in the session
-$userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : "Guest"; // Fallback if the name is not set
+$userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : "Guest";
+$profilePhoto = isset($_SESSION['profile_photo']) && file_exists("../uploads/" . $_SESSION['profile_photo'])
+    ? $_SESSION['profile_photo']
+    : 'default-avatar.png'; // Default if file not found
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css"> <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
-    
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
+            /* background-color: #e9ecef; */
             background: url('../images/abstract.avif') no-repeat center center fixed;
             background-size: cover;
             display: flex;
@@ -28,11 +29,12 @@ $userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : "Guest"; //
         }
         .sidebar {
             height: 100vh;
-            width: 250px;
-            position: fixed;
+            width: 50px;
             background-color: #343a40;
-            padding-top: 30px;
-            transition: width 0.3s ease;
+            padding: 20px;
+            position: fixed;
+            transition: width 0.3s;
+            overflow: hidden;
         }
         .sidebar a {
             color: white;
@@ -47,10 +49,8 @@ $userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : "Guest"; //
             background-color: #495057;
             transform: translateX(5px);
         }
-        .content {
-            margin-left: 260px;
-            padding: 20px;
-            transition: margin-left 0.3s ease;
+        .sidebar:hover {
+            width: 250px;
         }
         .header {
             background-color: rgba(0, 123, 255, 0.8);
@@ -60,6 +60,39 @@ $userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : "Guest"; //
             margin-bottom: 20px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .sidebar h2 {
+            color: white;
+            margin-bottom: 30px;
+            display: none; /* Hide title initially */
+        }
+        .sidebar:hover h2 {
+            display: block; /* Show title on hover */
+        }
+        .sidebar a {
+            color: #adb5bd;
+            padding: 10px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .sidebar-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .content {
+            margin-left: 60px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+        .sidebar:hover + .content {
+            margin-left: 250px;
         }
         .card {
             margin: 20px;
@@ -68,8 +101,8 @@ $userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : "Guest"; //
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .card:hover {
-            transform: translateY(-5px);
+        .card:hover{
+            transform: translate(-5px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
         .card-body {
@@ -85,24 +118,53 @@ $userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : "Guest"; //
         .btn-custom:hover {
             background-color: #218838;
         }
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .navbar-brand:hover, .nav-link:hover {
+            color: #f8f9fa !important;
+        }
+        h1 {
+            color: #343a40;
+        }
+        .feature-section {
+            margin-top: 40px;
+        }
+        .feature-card {
+            text-align: center;
+        }
+        .feature-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+        .profile-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <h2 class="text-center text-white">Dashboard</h2>
-        <a href="submit_complaint.php"><i class="fas fa-file-alt"></i> Submit Complaint</a>
-        <!-- <a href="add_guardian.php"><i class="fas fa-user-plus"></i> Add Guardian</a> -->
-        <a href="manage_guardians.php"><i class="fas fa-user-plus"></i> Manage Guardian</a>
-        <a href="view_complaint_status.php"><i class="fas fa-eye"></i> View Complaint Status</a>
-        <a href="manage_profile.php"><i class="fas fa-user"></i> Manage Profile</a>
-        <a href="sos_button.php" class="btn btn-danger text-left"><i class="fas fa-exclamation-triangle"></i> Emergency SOS</a>
-        <a href="feedback.html"><i class="fas fa-comments"></i> Feedback</a>
-        <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
-        <!-- <a href="logout.php"><span class="sidebar-icon"></span> Logout</a> -->
+        <h2>Dashboard</h2>
+        <a href="submit_complaint.php"><span class="sidebar-icon">📓</span> Complaint</a>
+        <a href="manage_guardians.php"><span class="sidebar-icon">🙎‍♂️</span>Manage Guardian</a>
+        <a href="view_complaint_status.php"><span class="sidebar-icon">📜</span>View Complaint</a>
+        <a href="manage_profile.php"><span class="sidebar-icon">🙎‍♂️</span>Manage Profile</a>
+        <a href="sos_button.php"><span class="sidebar-icon">🚨</span>Emergency SOS</a>
+        <a href="feedback.html"><span class="sidebar-icon">🧾</span>Feedback</a>
+        <a href="logout.php"><span class="sidebar-icon">↩️</span>Logout</a>
+ 
     </div>
-
     <div class="content">
         <div class="header">
+            <img src="../uploads/672507271bd91_IMG_14389.jpg" alt="Profile Photo" class="profile-photo">
             <h1>Welcome, <?php echo htmlspecialchars($userName); ?>!</h1>
         </div>
         <div class="row">
@@ -136,8 +198,26 @@ $userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : "Guest"; //
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body text-center">
+                        <h5 class="card-title">Manage Profile</h5>
+                        <p class="card-text">Manage your profile, you can change easily your information.</p>
+                        <a href="manage_profile.php" class="btn btn-custom">Manage Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Panic Button</h5>
+                        <p class="card-text">Click on panic button, if you are not feel secured ot unsafe.</p>
+                        <a href="sos_button.php" class="btn btn-custom">Panic Button</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
                         <h5 class="card-title">Feedback</h5>
-                        <p class="card-text">Submit your feedback.</p>
+                        <p class="card-text">Submit your feedback. We will respond to it soon. Take care.</p>
                         <a href="feedback.html" class="btn btn-custom">Feedback</a>
                     </div>
                 </div>

@@ -58,6 +58,8 @@
             position: relative;
             border-radius: 15px;
             margin-top: 20px;
+            transition: transform .2s;
+           
         }
         .image-container img {
             width: 100vw; /* Extend image width beyond container */
@@ -66,8 +68,15 @@
             object-position: center;
             position: absolute;
             left: 50%;
-            transform: translateX(-50%); /* Center image */
+            transform: translateX(-50%); 
+           
+            
         }
+        .image-container:hover{
+            transform: scale(1.05);
+        }
+
+
         .btn-primary, .btn-success, .btn-danger {
             border-radius: 20px;
         }
@@ -112,7 +121,7 @@
 
     <!-- Responsive Image Container -->
     <div class="image-container">
-        <img src="./images/womens-safety.jpg" alt="Future Scope Image">
+        <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/womens-safety.jpg" alt="Future Scope Image" title="Click, If you want to get daily news realted to women!" ></a>
     </div>
 
     <br>
