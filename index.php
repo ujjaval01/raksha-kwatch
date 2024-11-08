@@ -14,17 +14,16 @@
             margin-top: 50px;
             text-align: center;
         }
-        h1 {
-            color: #6c757d;
-            font-weight: bold;
-            margin-bottom: 30px;
+        h1, h2, h3, p, .card-title, .card-text {
+            transition: all 0.3s ease;
         }
         .title-banner {
-            background-color:#343a40;
+            background-color: #343a40;
             color: white;
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 30px;
+            position: relative;
         }
         .portal-card {
             transition: transform 0.3s, box-shadow 0.3s;
@@ -39,98 +38,163 @@
         footer {
             background-color: #343a40;
             color: white;
-            padding: 1px 0;
+            padding: 10px 0;
             position: relative;
             bottom: 0;
             width: 100%;
-            margin-top: 5px;
+            margin-top: 20px;
         }
         .future-scope {
             background-color: #e9ecef;
             padding: 40px;
             border-radius: 15px;
-            margin-top: 3px;
+            margin-top: 30px;
         }
         .image-container {
             width: 100%;
-            height: 400px; /* Set desired height */
+            height: 400px;
             overflow: hidden;
             position: relative;
             border-radius: 15px;
             margin-top: 20px;
             transition: transform .2s;
-           
         }
         .image-container img {
-            width: 100vw; /* Extend image width beyond container */
+            width: 100vw;
             height: 100%;
             object-fit: cover;
             object-position: center;
             position: absolute;
             left: 50%;
-            transform: translateX(-50%); 
-           
-            
+            transform: translateX(-50%);
         }
-        .image-container:hover{
+        .image-container:hover {
             transform: scale(1.05);
         }
-
-
         .btn-primary, .btn-success, .btn-danger {
             border-radius: 20px;
         }
+        .language-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .language-btn:hover {
+            background-color: #0056b3;
+        }
+
+       
+    /* Sliding Cards Styles */
+    .sliding-cards {
+      display: flex;
+      overflow-x: hidden; /* Hide scrollbar */
+      scroll-behavior: smooth;
+      padding: 20px;
+      margin: 20px 0;
+      white-space: nowrap; /* Keep images in a single row */
+    }
+
+    .sliding-cards img {
+      display: inline-block;
+      width: 200px;
+      height: 150px;
+      object-fit: cover; /* Ensures images are cropped to fit */
+      border-radius: 8px;
+      margin-right: 10px;
+      transition: transform 0.2s;
+    }
+
+    /* Image zoom effect on hover */
+    .sliding-cards img:hover {
+      transform: scale(1.1);
+    }
+  
+    .scroll-text {
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .scroll-text span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 15s linear infinite;
+      font-size: 24px; /* Increase the font size */
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+
+
     </style>
 </head>
 <body>
 
+<!-- Language Button -->
+<button class="language-btn" onclick="toggleLanguage()">EN / HI</button>
+
 <div class="container">
     <div class="title-banner">
-        <h1>रक्षा कवच (Protection Shield)</h1>
-        <h2>A Web Based Real-time Reporting or Guardian Alerts Women Safety & Security System Application</h2>
+        <h1 id="title">Protection Shield (रक्षा कवच)</h1>
+        <div class="scroll-text">
+        <span>A Web Based Real-time Reporting or Guardian Alerts Women Safety & Security System Application!</span>
+
+
+        </div>
+        <!-- <marquee id="subtitle" behavior="scroll" direction="left">A Web Based Real-time Reporting or Guardian Alerts Women Safety & Security System Application</marquee>> -->
+        <!-- <h2 id="subtitle">A Web Based Real-time Reporting or Guardian Alerts Women Safety & Security System Application</h2> -->
     </div>
     <div class="row mb-5">
         <div class="col-md-4">
             <div class="card portal-card">
                 <div class="card-body">
-                    <h5 class="card-title">Admin Portal</h5>
-                    <p class="card-text">Manage the entire application and user complaints.</p>
-                    <a href="admin/admin_login.php" class="btn btn-primary">Access Admin</a>
+                    <h5 class="card-title" id="adminTitle">Admin Portal</h5>
+                    <p class="card-text" id="adminText">Manage the entire application and user complaints.</p>
+                    <a href="admin/admin_login.php" class="btn btn-primary" id="adminBtn">Access Admin</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card portal-card">
                 <div class="card-body">
-                    <h5 class="card-title">User Portal</h5>
-                    <p class="card-text">Submit complaints and manage your profile.</p>
-                    <a href="user/login.php" class="btn btn-success">Access User</a>
+                    <h5 class="card-title" id="userTitle">User Portal</h5>
+                    <p class="card-text" id="userText">Submit complaints and manage your profile.</p>
+                    <a href="user/login.php" class="btn btn-success" id="userBtn">Access User</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card portal-card">
                 <div class="card-body">
-                    <h5 class="card-title">Police Portal</h5>
-                    <p class="card-text">Review complaints and take necessary actions.</p>
-                    <a href="police/register_police.php" class="btn btn-danger">Access Police</a>
+                    <h5 class="card-title" id="policeTitle">Police Portal</h5>
+                    <p class="card-text" id="policeText">Review complaints and take necessary actions.</p>
+                    <a href="police/register_police.php" class="btn btn-danger" id="policeBtn">Access Police</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Responsive Image Container -->
     <div class="image-container">
-        <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/womens-safety.jpg" alt="Future Scope Image" title="Click, If you want to get daily news realted to women!" ></a>
+        <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/womens-safety.jpg" alt="Future Scope Image" title="Click, If you want to get daily news related to women!" ></a>
     </div>
 
     <br>
-    <h2>About the Application</h2>
-    <p>The Women Safety System is designed to empower women by providing them with a secure platform to submit complaints and manage their safety. It connects users with the relevant authorities, ensuring timely responses to incidents.</p>
+    <h2 id="aboutTitle">About the Application</h2>
+    <p id="aboutText">The Women Safety System is designed to empower women by providing them with a secure platform to submit complaints and manage their safety. It connects users with the relevant authorities, ensuring timely responses to incidents.</p>
     
     <div class="future-scope">
-        <h3>Future Scope</h3>
-        <p>In the future, we plan to enhance the application by integrating:</p>
+        <h3 id="futureScopeTitle">Future Scope</h3>
+        <p id="futureScopeText">In the future, we plan to enhance the application by integrating:</p>
         <ul>
             <li>Real-time GPS tracking for emergency situations</li>
             <li>Chatbot support for instant assistance</li>
@@ -139,6 +203,18 @@
         </ul>
     </div>
 </div>
+
+<div class="sliding-cards" id="slidingCards">
+    <img src="images/admin.png" alt="Image 1">
+    <img src="images/admin_login.jpg" alt="Image 2">
+    <img src="images/desktop.jpg" alt="Image 3">
+    <img src="images/GettyImages.jpg" alt="Image 4">
+    <img src="images/panic.jpg" alt="Image 5">
+    <img src="images/user_reg.jpg" alt="Image 6">
+    <img src="images/image3.webp" alt="Image 7">
+    <img src="images/images (1).png" alt="Image 8">
+  </div>
+
 
 <footer>
     <div class="container text-center">
@@ -150,5 +226,97 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let isHindi = false;
+
+    const content = {
+        english: {
+            title: "Protection Shield (रक्षा कवच)",
+            subtitle: "A Web Based Real-time Reporting or Guardian Alerts Women Safety & Security System Application",
+            adminTitle: "Admin Portal",
+            adminText: "Manage the entire application and user complaints.",
+            adminBtn: "Access Admin",
+            userTitle: "User Portal",
+            userText: "Submit complaints and manage your profile.",
+            userBtn: "Access User",
+            policeTitle: "Police Portal",
+            policeText: "Review complaints and take necessary actions.",
+            policeBtn: "Access Police",
+            aboutTitle: "About the Application",
+            aboutText: "The Women Safety System is designed to empower women by providing them with a secure platform to submit complaints and manage their safety. It connects users with the relevant authorities, ensuring timely responses to incidents.",
+            futureScopeTitle: "Future Scope",
+            futureScopeText: "In the future, we plan to enhance the application by integrating:"
+        },
+        hindi: {
+            title: "रक्षा कवच (Protection Shield)",
+            subtitle: "एक वेब आधारित वास्तविक समय रिपोर्टिंग या अभिभावक अलर्ट महिला सुरक्षा और सुरक्षा प्रणाली आवेदन",
+            adminTitle: "प्रशासन पोर्टल",
+            adminText: "पूरे आवेदन और उपयोगकर्ता शिकायतों का प्रबंधन करें।",
+            adminBtn: "प्रवेश प्रशासक",
+            userTitle: "उपयोगकर्ता पोर्टल",
+            userText: "शिकायतें दर्ज करें और अपनी प्रोफ़ाइल प्रबंधित करें।",
+            userBtn: "प्रवेश उपयोगकर्ता",
+            policeTitle: "पुलिस पोर्टल",
+            policeText: "शिकायतों की समीक्षा करें और आवश्यक कार्य करें।",
+            policeBtn: "प्रवेश पुलिस",
+            aboutTitle: "आवेदन के बारे में",
+            aboutText: "महिला सुरक्षा प्रणाली महिलाओं को सशक्त बनाने के लिए डिज़ाइन की गई है ताकि उन्हें शिकायतें दर्ज करने और उनकी सुरक्षा प्रबंधित करने के लिए एक सुरक्षित मंच मिल सके। यह उपयोगकर्ताओं को संबंधित अधिकारियों के साथ जोड़ता है, जो घटनाओं के लिए समय पर प्रतिक्रियाएँ सुनिश्चित करता है।",
+            futureScopeTitle: "भविष्य का दायरा",
+            futureScopeText: "भविष्य में, हम निम्नलिखित सुविधाओं को जोड़ने की योजना बना रहे हैं:"
+        }
+    };
+
+    function toggleLanguage() {
+        isHindi = !isHindi;
+        const lang = isHindi ? "hindi" : "english";
+
+        document.getElementById("title").innerText = content[lang].title;
+        document.getElementById("subtitle").innerText = content[lang].subtitle;
+        document.getElementById("adminTitle").innerText = content[lang].adminTitle;
+        document.getElementById("adminText").innerText = content[lang].adminText;
+        document.getElementById("adminBtn").innerText = content[lang].adminBtn;
+        document.getElementById("userTitle").innerText = content[lang].userTitle;
+        document.getElementById("userText").innerText = content[lang].userText;
+        document.getElementById("userBtn").innerText = content[lang].userBtn;
+        document.getElementById("policeTitle").innerText = content[lang].policeTitle;
+        document.getElementById("policeText").innerText = content[lang].policeText;
+        document.getElementById("policeBtn").innerText = content[lang].policeBtn;
+        document.getElementById("aboutTitle").innerText = content[lang].aboutTitle;
+        document.getElementById("aboutText").innerText = content[lang].aboutText;
+        document.getElementById("futureScopeTitle").innerText = content[lang].futureScopeTitle;
+        document.getElementById("futureScopeText").innerText = content[lang].futureScopeText;
+    }
+
+    const cardsContainer = document.getElementById('slidingCards');
+    let scrollAmount = 10; // Increase this value to make sliding faster
+  
+    function duplicateImages() {
+      const images = Array.from(cardsContainer.children);
+      images.forEach(image => {
+        const clone = image.cloneNode(true);
+        cardsContainer.appendChild(clone);
+      });
+    }
+  
+    function continuousScroll() {
+      cardsContainer.scrollLeft += scrollAmount;
+  
+      if (cardsContainer.scrollLeft >= cardsContainer.scrollWidth / 2) {
+        cardsContainer.scrollLeft = 0;
+      }
+    }
+  
+    function startAutoScroll() {
+      setInterval(continuousScroll, 10); // Decrease interval for faster scrolling
+    }
+  
+    document.querySelectorAll('.sliding-cards img').forEach(img => {
+      img.addEventListener('mouseenter', () => scrollAmount = 0);
+      img.addEventListener('mouseleave', () => scrollAmount = 10);
+    });
+  
+    duplicateImages();
+    startAutoScroll();
+</script>
 </body>
 </html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Continuous Sliding Images</title>
+  <style>
+    /* Sliding Cards Styles */
+    .sliding-cards {
+      display: flex;
+      overflow-x: hidden; /* Hide scrollbar */
+      scroll-behavior: smooth;
+      padding: 20px;
+      margin: 20px 0;
+      white-space: nowrap; /* Keep images in a single row */
+    }
+
+    .sliding-cards img {
+      display: inline-block;
+      width: 200px;
+      height: 150px;
+      object-fit: cover; /* Ensures images are cropped to fit */
+      border-radius: 8px;
+      margin-right: 10px;
+      transition: transform 0.2s;
+    }
+
+    /* Image zoom effect on hover */
+    .sliding-cards img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sliding Images -->
+  <div class="sliding-cards" id="slidingCards">
+    <img src="images/admin.png" alt="Image 1">
+    <img src="images/admin_login.jpg" alt="Image 2">
+    <img src="images/desktop.jpg" alt="Image 3">
+    <img src="images/GettyImages.jpg" alt="Image 4">
+    <img src="images/panic.jpg" alt="Image 5">
+    <img src="images/user_reg.jpg" alt="Image 6">
+    <img src="images/image3.webp" alt="Image 7">
+    <img src="images/images (1).png" alt="Image 8">
+  </div>
+
+  <script>
+    const cardsContainer = document.getElementById('slidingCards');
+    let scrollAmount = 10; // Increase this value to make sliding faster
+  
+    function duplicateImages() {
+      const images = Array.from(cardsContainer.children);
+      images.forEach(image => {
+        const clone = image.cloneNode(true);
+        cardsContainer.appendChild(clone);
+      });
+    }
+  
+    function continuousScroll() {
+      cardsContainer.scrollLeft += scrollAmount;
+  
+      if (cardsContainer.scrollLeft >= cardsContainer.scrollWidth / 2) {
+        cardsContainer.scrollLeft = 0;
+      }
+    }
+  
+    function startAutoScroll() {
+      setInterval(continuousScroll, 10); // Decrease interval for faster scrolling
+    }
+  
+    document.querySelectorAll('.sliding-cards img').forEach(img => {
+      img.addEventListener('mouseenter', () => scrollAmount = 0);
+      img.addEventListener('mouseleave', () => scrollAmount = 10);
+    });
+  
+    duplicateImages();
+    startAutoScroll();
+  </script>
+  
+</body>
+</html>
