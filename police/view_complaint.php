@@ -2,13 +2,12 @@
 session_start();
 include '../config.php';
 
-// Check if the user is logged in
 if (!isset($_SESSION['police_id'])) {
-    header('Location: police_login.php'); // Redirect to login if not logged in
+    header('Location: police_login.php'); 
     exit();
 }
 
-// Retrieve complaints from the database
+
 $stmt = $conn->prepare("SELECT * FROM complaints");
 $stmt->execute();
 $result = $stmt->get_result();

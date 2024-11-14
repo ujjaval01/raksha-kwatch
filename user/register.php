@@ -34,16 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $mail = new PHPMailer(true);
         
-        // Enable SMTP debugging
-        $mail->SMTPDebug = 3; // You can use 3 for even more details
+       
+        $mail->SMTPDebug = 3; 
 
         try {
-            // SMTP server settings
+            
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'sainiujvl@gmail.com'; // Your Gmail address
-            $mail->Password = 'gtzr kuhg cghz fatg';    // App-specific password
+            $mail->Username = 'sainiujvl@gmail.com'; 
+            $mail->Password = 'gtzr kuhg cghz fatg';   
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
             
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("Location: verify_otp.php");
             exit;
         } catch (Exception $e) {
-            // More detailed error message logging
+            
             $error_message = "Error sending OTP: " . $mail->ErrorInfo;
             error_log($error_message); 
         }
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             text-align: center;
         }
         .register-image {
-            background-image: url('../images/user_reg.jpg'); /* Replace with your image path */
+            background-image: url('../images/user_reg.jpg'); 
             background-size: cover;
             background-position: center;
             flex: 4;

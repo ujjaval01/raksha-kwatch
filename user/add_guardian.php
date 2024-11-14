@@ -2,7 +2,7 @@
 session_start();
 include '../config.php';
 
-// Check if the user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $guardian_name = $_POST['guardian_name'];
     $guardian_phone = $_POST['guardian_phone'];
 
-    // Insert into guardians table
     $stmt = $conn->prepare("INSERT INTO guardians (user_id, guardian_name, guardian_phone) VALUES (?, ?, ?)");
     $stmt->bind_param("iss", $user_id, $guardian_name, $guardian_phone);
     
@@ -69,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container">
     <h2 class="text-center mb-4">Add Guardian</h2>
 
-    <!-- Display success or error message -->
+
     <?php if (isset($success_message)): ?>
         <div class="alert alert-success" role="alert">
             <?php echo $success_message; ?>
@@ -82,7 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     <?php endif; ?>
 
-    <!-- Add Guardian Form -->
     <form method="POST" action="add_guardian.php">
         <div class="mb-3">
             <label for="guardian_name" class="form-label">Guardian Name</label>
@@ -94,15 +92,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" class="form-control" id="guardian_phone" name="guardian_phone" placeholder="Guardian Phone Number" required>
         </div>
 
-        <!-- Submit Button -->
+        
         <button type="submit" class="btn btn-custom w-100">Add Guardian</button>
 
-        <!-- Back Button -->
+       
         <a href="index.php" class="btn btn-secondary w-100 mt-3">Back to Dashboard</a>
     </form>
 </div>
 
-<!-- Bootstrap JS -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

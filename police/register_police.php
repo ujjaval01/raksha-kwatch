@@ -7,9 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $station = $_POST['station'];
     $email = $_POST['email'];
     $phone_number = $_POST['phone_number'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hash the password
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); 
 
-    // Insert into the database
+   
     $stmt = $conn->prepare("INSERT INTO police (name, station, email, phone_number, password) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sssss", $name, $station, $email, $phone_number, $password);
 
@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Register Police</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+       
         body, html {
             height: 100%;
             margin: 0;
@@ -45,13 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             width: 100vw;
         }
         .register-image {
-            background-image: url('../images/police_reg.jpg'); /* Replace with your image path */
+            background-image: url('../images/police_reg.jpg');
             background-size: cover;
             background-position: center;
-            flex: 3; /* 75% width */
+            flex: 3;
         }
         .register-form {
-            flex: 1; /* 25% width */
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -114,17 +115,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 
 <div class="register-container">
-    <!-- Left side: Image (75% of the page) -->
+   
     <div class="register-image"></div>
 
-    <!-- Right side: Registration form (25% of the page) -->
+   
     <div class="register-form">
         <div class="register-form-content">
             <h2>Register Police</h2>
             <?php if (isset($success_message)) echo "<div class='alert alert-success'>$success_message</div>"; ?>
             <?php if (isset($error_message)) echo "<div class='alert alert-danger'>$error_message</div>"; ?>
 
-            <form method="POST" action="">
+            <form method="POST" action="" onsubmit="return validateForm()">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" name="name" id="name" required>
@@ -145,6 +146,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" name="password" id="password" required>
                 </div>
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" name="confirm_password" id="confirm_password" required>
+                </div>
                 <button type="submit" class="btn btn-primary mt-3">Register</button>
             </form>
             <a href="login_police.php" class="btn btn-secondary mt-3">Already have an account? Login</a>
@@ -153,5 +158,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function validateForm() {
+        const phoneNumber = document.getElementById("phone_number").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm_password").value;
+        
+       
+        const phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(phoneNumber)) {
+            alert("Please enter a valid 10-digit phone number.");
+            return false;
+        }
+        
+       
+        if (password !== confirmPassword) {
+            alert("Passwords do not match. Please try again.");
+            return false;
+        }
+        
+        return true;
+    }
+</script>
 </body>
 </html>

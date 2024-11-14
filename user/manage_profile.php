@@ -2,7 +2,6 @@
 session_start();
 include '../config.php';
 
-// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
@@ -12,13 +11,12 @@ $user_id = $_SESSION['user_id'];
 $error_message = '';
 $success_message = '';
 
-// Handle profile updates
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone_number = $_POST['phone_number'];
 
-    // File upload
+    
     $profile_photo = $_FILES['profile_photo'];
     $photo_path = null;
 
@@ -27,11 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         move_uploaded_file($profile_photo['tmp_name'], $photo_path);
     }
 
-    // Update database
+ 
     $sql = "UPDATE users SET name=?, email=?, phone_number=?";
     $params = [$name, $email, $phone_number];
 
-    // Only update photo if a new one was uploaded
+  
     if ($photo_path) {
         $sql .= ", profile_photo=?";
         $params[] = $photo_path;
@@ -49,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Fetch current user data
 $stmt = $conn->prepare("SELECT name, email, phone_number, profile_photo FROM users WHERE id=?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -77,7 +74,7 @@ $stmt->close();
 <div class="container mt-5">
     <h2>Manage Profile</h2>
 
-    <!-- Success and Error Messages -->
+   
     <?php if ($success_message): ?>
         <div class="alert alert-success"><?= $success_message ?></div>
     <?php endif; ?>

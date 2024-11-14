@@ -6,7 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Retrieve the police record by email
     $stmt = $conn->prepare("SELECT * FROM police WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -15,10 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
         
-        // Verify the password
+      
         if (password_verify($password, $row['password'])) {
-            $_SESSION['police_id'] = $row['id']; // Store police ID in session
-            header('Location: index.php'); // Redirect to police dashboard
+            $_SESSION['police_id'] = $row['id']; 
+            header('Location: index.php'); 
             exit();
         } else {
             $error_message = "Invalid email or password.";
@@ -57,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background-color: #ffffff;
         }
         .login-image {
-            background-image: url('../images/police_login.webp'); /* Replace with your image path */
+            background-image: url('../images/police_login.webp'); 
             background-size: cover;
             background-position: center;
             flex: 2;
@@ -141,10 +140,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 
 <div class="login-container">
-    <!-- Left side: Image (75% of the page) -->
+
     <div class="login-image"></div>
 
-    <!-- Right side: Login form (25% of the page) -->
     <div class="login-form">
         <div class="login-form-content">
             <h2>Police Login</h2>
@@ -177,10 +175,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         const toggleButton = document.querySelector(".toggle-password");
         if (passwordInput.type === "password") {
             passwordInput.type = "text";
-            toggleButton.textContent = "👀"; // Change icon when showing password
+            toggleButton.textContent = "👀"; 
         } else {
             passwordInput.type = "password";
-            toggleButton.textContent = "👁️"; // Change back icon when hiding password
+            toggleButton.textContent = "👁️"; 
         }
     }
 </script>

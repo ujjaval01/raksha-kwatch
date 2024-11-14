@@ -2,7 +2,6 @@
 session_start();
 include '../config.php';
 
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
@@ -14,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $complaint_type = $_POST['complaint_type'];
     $complaint_details = $_POST['complaint_details'];
 
-    // Insert into complaints table
+  
     $stmt = $conn->prepare("INSERT INTO complaints (user_id, complaint_type, complaint_details) VALUES (?, ?, ?)");
     $stmt->bind_param("iss", $user_id, $complaint_type, $complaint_details);
     

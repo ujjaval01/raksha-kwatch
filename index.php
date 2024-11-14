@@ -234,7 +234,7 @@
     }
 
     const cardsContainer = document.getElementById('slidingCards');
-    let scrollAmount = 10; // Increase this value to make sliding faster
+    let scrollAmount = 10; 
   
     function duplicateImages() {
       const images = Array.from(cardsContainer.children);
@@ -253,7 +253,7 @@
     }
   
     function startAutoScroll() {
-      setInterval(continuousScroll, 10); // Decrease interval for faster scrolling
+      setInterval(continuousScroll, 10); 
     }
   
     document.querySelectorAll('.sliding-cards img').forEach(img => {
@@ -265,13 +265,13 @@
     startAutoScroll();
 
  
-   // added more again
+
    const cardsContainerx = document.getElementById('slidingCard');
     const imagesx = document.querySelectorAll('.sliding-card img');
     const dotsContainer = document.getElementById('sliderDots');
     let currentIndexx = 0;
 
-    // Create dots based on the number of images
+
     imagesx.forEach((_, index) => {
       const dot = document.createElement('div');
       dot.classList.add('dot');
@@ -289,7 +289,7 @@
       // Adjust transform for sliding effect
       cardsContainerx.style.transform = `translateX(-${currentIndexx * 1000}px)`;
 
-      // Update active dot
+ 
       document.querySelectorAll('.dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === currentIndexx);
       });
@@ -300,7 +300,7 @@
       updateSlider();
     }
 
-    // Slide every 2.5 seconds
+
     setInterval(autoSlide, 2500);
 
 

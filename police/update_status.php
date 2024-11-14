@@ -2,9 +2,9 @@
 session_start();
 include '../config.php';
 
-// Check if the user is logged in
+
 if (!isset($_SESSION['police_id'])) {
-    header('Location: police_login.php'); // Redirect to login if not logged in
+    header('Location: police_login.php'); 
     exit();
 }
 
@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $complaint_id = $_POST['complaint_id'];
     $status = $_POST['status'];
 
-    // Update complaint status
+   
     $stmt = $conn->prepare("UPDATE complaints SET status = ? WHERE id = ?");
     $stmt->bind_param("si", $status, $complaint_id);
 
@@ -25,7 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 }
 
-// Retrieve complaints for selection
 $stmt = $conn->prepare("SELECT * FROM complaints");
 $stmt->execute();
 $result = $stmt->get_result();

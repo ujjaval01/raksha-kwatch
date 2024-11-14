@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config.php';  // Ensure your database configuration is in this file
+require '../config.php';  
 require '../vendor/autoload.php'; 
 
 
@@ -11,13 +11,13 @@ use Twilio\Rest\Client;
 
 // Twilio credentials
 $account_sid = 'ACe71c6b10e61c7f60ab035927786ef93b';
-$auth_token = '4ca1db3e8f9e045d7d70ef4f90b84930';
-$twilio_number = '+18434201085'; // Twilio phone number in E.164 format
+$auth_token = '859ca8edaa22f980e99d9356e801cbdf';
+$twilio_number = '+18434201085'; 
 
 // LocationIQ API key
 $locationiq_api_key = 'pk.ad40b807432aea49cbbe411a1174834f';
 
-// Get the pincode using LocationIQ's Reverse Geocoding API
+
 $pincode = '';
 $locationiq_url = "https://us1.locationiq.com/v1/reverse.php?key=$locationiq_api_key&lat=$latitude&lon=$longitude&format=json";
 
@@ -33,7 +33,7 @@ if ($response !== FALSE) {
     $pincode = 'Error retrieving pincode';
 }
 
-// Check if user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
@@ -42,33 +42,30 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $client = new Client($account_sid, $auth_token);
 
-// Fetch guardian phone numbers from the database
+
 $sql = "SELECT guardian_phone FROM guardians WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Initialize message status
 $message_status = [];
 $success_count = 0;
 $error_count = 0;
 
-// Loop through each guardian and send an SMS
 while ($row = $result->fetch_assoc()) {
     $guardian_phone = $row['guardian_phone'];
 
-    // Format the phone number with country code
-    $formatted_phone_number = "+91" . ltrim($guardian_phone, '0'); // Assuming all numbers are Indian numbers
+   
+    $formatted_phone_number = "+91" . ltrim($guardian_phone, '0'); 
     $google_maps_link = "https://www.google.com/maps?q=$latitude,$longitude";
     
-    // Updated message body with pincode
     $sms_message = "Emergency Alert! I am in immediate danger and need help. Location: $google_maps_link, Area Pincode: $pincode. Please assist me as soon as possible.";
     
     try {
         // Send SOS alert
         $message = $client->messages->create(
-            $formatted_phone_number, // Guardian's phone number with country code
+            $formatted_phone_number, 
             [
                 'from' => $twilio_number,
                 'body' => $sms_message
@@ -82,7 +79,7 @@ while ($row = $result->fetch_assoc()) {
     }
 }
 
-// Close database connection
+
 $stmt->close();
 $conn->close();
 ?>
@@ -107,7 +104,7 @@ $conn->close();
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            color: #dc3545; /* Red color for emphasis */
+            color: #dc3545; 
         }
         .alert {
             margin-bottom: 15px;

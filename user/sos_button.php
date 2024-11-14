@@ -19,7 +19,7 @@ if (!isset($_SESSION['user_id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f0f4f8; /* Soft background color */
+            background-color: #f0f4f8; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -32,7 +32,7 @@ if (!isset($_SESSION['user_id'])) {
             border-radius: 12px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
-            animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+            animation: fadeIn 0.5s ease-in-out; 
         }
         @keyframes fadeIn {
             from {
@@ -45,33 +45,33 @@ if (!isset($_SESSION['user_id'])) {
             }
         }
         h2 {
-            color: #dc3545; /* Red color for emphasis */
+            color: #dc3545; 
             margin-bottom: 20px;
-            font-size: 2rem; /* Increased font size */
+            font-size: 2rem;
         }
         p {
             font-size: 1.2rem; /* Slightly larger paragraph text */
-            color: #555; /* Darker gray for better readability */
+            color: #555; /
             margin-bottom: 30px;
         }
         .btn-sos {
-            width: 100px; /* Fixed width for the button */
-            height: 100px; /* Fixed height for the button */
-            border-radius: 50%; /* Circular button */
+            width: 100px; 
+            height: 100px; 
+            border-radius: 50%; 
             font-size: 1.5rem;
-            background-color: #dc3545; /* Red background */
+            background-color: #dc3545;
             color: white;
             border: none;
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
-            overflow: hidden; /* For ripple effect */
+            overflow: hidden; 
         }
         .btn-sos.clicked {
-            background-color: #c82333; /* Darker red when clicked */
+            background-color: #c82333; 
         }
         .btn-sos:hover {
-            transform: scale(1.1); /* Slightly increase size on hover */
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+            transform: scale(1.1); 
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); 
         }
         .status-message {
             margin-top: 20px;
@@ -85,10 +85,10 @@ if (!isset($_SESSION['user_id'])) {
     
     <p>Press the button below to send an SOS alert to your guardians.</p>
     
-    <!-- SOS Button -->
+   
     <button class="btn btn-sos" id="sosButton" onclick="sendSOS()">SOS</button>
     
-    <!-- Display status message if SOS sent or failed -->
+ 
     <div class="status-message">
         <?php
         if (isset($_GET['status'])) {
@@ -102,7 +102,7 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 </div>
 
-<!-- Geolocation Script -->
+<!-- Geolocation -->
 <script>
 function sendSOS() {
     const sosButton = document.getElementById('sosButton');
@@ -114,14 +114,14 @@ function sendSOS() {
             const longitude = position.coords.longitude;
 
             try {
-                // Fetch location data from LocationIQ
+                
                 const response = await fetch(`https://us1.locationiq.com/v1/reverse.php?key=YOUR_LOCATIONIQ_API_KEY&lat=${latitude}&lon=${longitude}&format=json`);
                 const locationData = await response.json();
 
-                // Get pincode from response
+               
                 const pincode = locationData.address.postcode;
 
-                // Redirect to sos_action.php with lat, lon, and pincode
+               
                 window.location.href = `sos_action.php?lat=${latitude}&lon=${longitude}&pincode=${pincode}`;
             } catch (error) {
                 window.location.href = `sos_action.php?lat=${latitude}&lon=${longitude}`;

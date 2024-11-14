@@ -1,15 +1,15 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php"); // Redirect to login if not logged in
+    header("Location: login.php"); 
     exit();
 }
 
-// Check if user_name is set in the session
+
 $userName = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : "Guest";
 $profilePhoto = isset($_SESSION['profile_photo']) && file_exists("../uploads/" . $_SESSION['profile_photo'])
     ? $_SESSION['profile_photo']
-    : 'default-avatar.png'; // Default if file not found
+    : 'default-avatar.png'; 
 ?>
 <!DOCTYPE html>
 <html lang="en">

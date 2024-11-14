@@ -2,7 +2,7 @@
 session_start();
 include '../config.php';
 
-// Check if the user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Fetch existing guardians
+
 $guardians = [];
 $stmt = $conn->prepare("SELECT * FROM guardians WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
@@ -20,25 +20,23 @@ while ($row = $result->fetch_assoc()) {
     $guardians[] = $row;
 }
 
-// Handle adding a guardian
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_guardian'])) {
     $guardian_name = $_POST['guardian_name'];
     $guardian_phone = $_POST['guardian_phone'];
 
-    // Insert into guardians table
+   
     $stmt = $conn->prepare("INSERT INTO guardians (user_id, guardian_name, guardian_phone) VALUES (?, ?, ?)");
     $stmt->bind_param("iss", $user_id, $guardian_name, $guardian_phone);
     
     if ($stmt->execute()) {
         $success_message = "Guardian added successfully!";
-        header("Location: manage_guardians.php"); // Refresh to avoid resubmission
+        header("Location: manage_guardians.php"); 
         exit();
     } else {
         $error_message = "Error: " . $stmt->error;
     }
 }
 
-// Handle deleting a guardian
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
 
@@ -47,14 +45,14 @@ if (isset($_GET['delete_id'])) {
     
     if ($stmt->execute()) {
         $success_message = "Guardian deleted successfully!";
-        header("Location: manage_guardians.php"); // Refresh to avoid resubmission
+        header("Location: manage_guardians.php"); 
         exit();
     } else {
         $error_message = "Error: " . $stmt->error;
     }
 }
 
-// Handle updating a guardian
+
 if (isset($_POST['edit_guardian'])) {
     $guardian_id = $_POST['guardian_id'];
     $guardian_name = $_POST['guardian_name'];
@@ -65,7 +63,7 @@ if (isset($_POST['edit_guardian'])) {
     
     if ($stmt->execute()) {
         $success_message = "Guardian updated successfully!";
-        header("Location: manage_guardians.php"); // Refresh to avoid resubmission
+        header("Location: manage_guardians.php");
         exit();
     } else {
         $error_message = "Error: " . $stmt->error;

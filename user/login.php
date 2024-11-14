@@ -167,10 +167,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         const toggleButton = document.querySelector(".toggle-password");
         if (passwordInput.type === "password") {
             passwordInput.type = "text";
-            toggleButton.textContent = "👀"; // Change icon when showing password
+            toggleButton.textContent = "👀"; 
         } else {
             passwordInput.type = "password";
-            toggleButton.textContent = "👁️"; // Change back icon when hiding password
+            toggleButton.textContent = "👁️"; 
         }
     }
 </script>

@@ -2,9 +2,9 @@
 session_start();
 include '../config.php';
 
-// Check if admin is logged in
+
 if (!isset($_SESSION['admin_logged_in'])) {
-    header('Location: admin_login.php'); // Redirect to login if not logged in
+    header('Location: admin_login.php'); 
     exit();
 }
 
@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Handle deleting a police officer
 if (isset($_GET['delete'])) {
     $officer_id = $_GET['delete'];
     $delete_stmt = $conn->prepare("DELETE FROM police WHERE id = ?");
@@ -34,7 +33,7 @@ if (isset($_GET['delete'])) {
     $delete_stmt->execute();
 }
 
-// Fetch existing police officers
+
 $police_officers = $conn->query("SELECT * FROM police")->fetch_all(MYSQLI_ASSOC);
 ?>
 

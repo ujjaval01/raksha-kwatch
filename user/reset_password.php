@@ -5,7 +5,6 @@ require '../config.php';
 $error_message = '';
 $success_message = '';
 
-// Ensure that the user is logged in and the email session variable is set
 if (!isset($_SESSION['email'])) {
     header("Location: login.php");
     exit;
@@ -14,16 +13,16 @@ if (!isset($_SESSION['email'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
-    $email = $_SESSION['email'];  // Accessing session email after ensuring it's set
+    $email = $_SESSION['email'];  
+    
 
-    // Check if the new password and confirm password match
     if ($new_password !== $confirm_password) {
         $error_message = "Passwords do not match. Please try again.";
     } else {
-        // Hash the new password before updating
+       
         $new_password_hashed = password_hash($new_password, PASSWORD_DEFAULT);
 
-        // Update password in the database
+        
         $stmt = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
         $stmt->bind_param("ss", $new_password_hashed, $email);
 
@@ -102,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="card">
             <h2>Reset Password</h2>
 
-            <!-- Error and Success Messages -->
+          
             <?php if ($error_message): ?>
                 <div class="alert alert-danger"><?= $error_message ?></div>
             <?php endif; ?>
@@ -110,7 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="alert alert-success"><?= $success_message ?></div>
             <?php endif; ?>
 
-            <!-- Form for password reset -->
             <form method="POST" action="reset_password.php">
                 <div class="mb-3">
                     <label for="new_password" class="form-label">New Password</label>

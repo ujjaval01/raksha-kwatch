@@ -5,7 +5,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Women Safety & Security System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    margin: 0;
+}
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+h1, h2 {
+    font-weight: 700;
+}
+
+p {
+    font-size: 1.1rem;
+}
+
+/* Header Section */
+header {
+    background-color: #007bff;
+    color: white;
+}
+
+header .display-4 {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+}
+
+header .lead {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+/* About Section */
+.about-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.about-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.about-section p {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* Key Features Section */
+ul.list-unstyled {
+    list-style: none;
+    padding: 0;
+}
+
+ul.list-unstyled li {
+    font-size: 1.1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+ul.list-unstyled li i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+/* Images in About Section */
+img.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+/* About the Developer Section */
+.bg-light {
+    background-color: #f7f7f7;
+}
+
+.bg-light h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.bg-light p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.bg-light a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.bg-light a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Section */
+footer {
+    background-color: #343a40;
+    color: white;
+}
+
+footer p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+    .about-section .row {
+        text-align: center;
+    }
+
+    .about-section img {
+        margin-top: 1rem;
+    }
+
+    .bg-light p {
+        font-size: 1rem;
+    }
+}
+
+    </style>
 </head>
 <body>
     <header class="bg-primary text-white text-center py-5">
