@@ -4,24 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Women Safety System</title>
+    <link rel="icon" type="image/png" href="./images/protection.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="mainStyles.css">
+    <style>
+        /* Style for a transparent and fixed navbar */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+            backdrop-filter: blur(10px); /* Adds a blur effect */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+        }
+        .navbar.fixed-top {
+            position: fixed; /* Makes the navbar stay on top during scroll */
+            top: 0;
+            width: 100%; /* Ensures it spans across the screen */
+            z-index: 1030; /* Keeps it above other elements */
+        }
+        .navbar-nav .nav-link {
+            color: #333; /* Text color */
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #007bff; /* Change color on hover */
+        }
+        body {
+            padding-top: 60px; /* Prevents content from overlapping the navbar */
+        }
+    </style>
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg ">
+<nav class="navbar navbar-expand-lg fixed-top">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto"> <!-- Added mx-auto to center the items -->
+      <ul class="navbar-nav mx-auto">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="about.php">About</a>
+          <a class="nav-link" href="#aboutTitle">About</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#contactTitle">Contact</a>
@@ -30,17 +56,13 @@
           <a class="nav-link" href="submit_feedback.php">Feedback</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#aboutTitle">Lang</a>
+          <!-- language button -->
+          <button class="nav-link btn btn-link" onclick="toggleLanguage()" id="languageButton" style="border: none;">हिन्दी</button>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-
-
-
-<!-- Language Button -->
-<button class="language-btn" onclick="toggleLanguage()" id="languageButton">हिन्दी</button>
 
 <div class="social-popup-bar">
     <a href="https://www.facebook.com/ujjaval.saini.96" class="facebook" target="_blank" title="Facebook">
@@ -102,17 +124,18 @@
     </div>
 
     <div class="sliding-card-container">
-    <div class="sliding-card" id="slidingCard">
-      <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/womens-safety.jpg" title="Click if you want to see women related news" alt="Image 1"></a>
-      <a href="https://economictimes.indiatimes.com/topic/women"><img id="news" src="./images/women-safety5.png" title="Click if you want to see women related news" alt="Image 5"></a>
-      <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/women-safety4.jpg" title="Click if you want to see women related news" alt="Image 1"></a>
-      <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/womens-safety.jpg" title="Click if you want to see women related news" alt="Image 1"></a>
-      <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/women-safety3.jpeg" title="Click if you want to see women related news" alt="Image 1"></a>
-      <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/womens-safety.jpg" title="Click if you want to see women related news" alt="Image 1"></a>
-      <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/women-safety2.jpg" title="Click if you want to see women related news" alt="Image 1"></a>
-    </div>
-    <div class="slider-dots" id="sliderDots"></div>
+  <div class="sliding-card" id="slidingCard">
+    <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/womens-safety.jpg" title="Click if you want to see women related news" alt="Image 1"  class="aman"></a>
+    <a href="https://economictimes.indiatimes.com/topic/women"><img id="news" src="./images/women-safety5.png" title="Click if you want to see women related news" alt="Image 5" class="aman"></a>
+    <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/women-safety4.jpg" title="Click if you want to see women related news" alt="Image 1" class="aman"></a>
+    <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/womens-safety.jpg" title="Click if you want to see women related news" alt="Image 1" class="aman"></a>
+    <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/women-safety3.jpeg" title="Click if you want to see women related news" alt="Image 1" class="aman"></a>
+    <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/womens-safety.jpg" title="Click if you want to see women related news" alt="Image 1" class="aman"></a>
+    <a href="https://economictimes.indiatimes.com/topic/women"><img src="./images/women-safety2.jpg" title="Click if you want to see women related news" alt="Image 1" class="aman"></a>
   </div>
+  <div class="slider-dots" id="sliderDots"></div> class="aman"
+</div>
+
 
 
 
@@ -143,15 +166,46 @@
     <img src="images/images (1).png" alt="Image 8">
   </div>
 
+<!-- Contact Us Section -->
+<div class="container my-5" id="contactTitle">
+    <h2 class="text-center mb-4" id="contact">Contact Us</h2>
+    <div class="row">
+        </div>
+        <div class="col-md-6">
+            <form class="p-4 shadow-lg rounded bg-light">
+                <div class="mb-3">
+                    <label for="name" class="form-label" id="name">Name</label>
+                    <input type="text" class="form-control" id="name1" placeholder="Enter your name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label" id="email">Email</label>
+                    <input type="email" class="form-control" id="email1" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label" id="phone">Mobile Number</label>
+                    <input type="tel" class="form-control" id="phone1" placeholder="Enter your mobile number" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label" id="message">Message</label>
+                    <textarea class="form-control" id="message1" rows="4" placeholder="Write your message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100" id="sendMessage">Send Message</button>
+            </form>
+        </div>
+    </div>
+</div>
 
-<footer>
+
+
+<footer class="bg-dark text-light py-4 mt-5">
     <div class="container text-center">
         <p>&copy; 2024 Women Safety System. All Rights Reserved.</p>
         <p>Developed by: Ujjaval Saini</p>
         <p>Contact: sainiujvl@gmail.com</p>
-        <a href="about.php">About the Application or Developer</a>
+        <a href="about.php" class="text-decoration-none text-light">About the Application or Developer</a>
     </div>
 </footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -178,7 +232,18 @@
             futureScopeText2:"Chatbot support for instant assistance",
             futureScopeText3:"Integration with local law enforcement databases",
             futureScopeText4:"Mobile app development for better accessibility",
-            news: "Click if you want to see women related news"
+            news: "Click if you want to see women related news",
+            contact: "contact",
+            name: "Name",
+            name1: "Enter your name",
+            email: "Email",
+            email1: "Enter your email",
+            phone: "Mobile Number",
+            phone1: "Enter your mobile number",
+            message: "Message",
+            message1: "Write your message",
+            sendMessage: "Send Message"
+            
 
         },
         hindi: {
@@ -201,7 +266,17 @@
             futureScopeText2:"त्वरित सहायता के लिए चैटबॉट समर्थन",
             futureScopeText3:"स्थानीय कानून प्रवर्तन डेटाबेस के साथ एकीकरण",
             futureScopeText4:"बेहतर पहुंच के लिए मोबाइल ऐप विकास",
-            news: "अगर आप महिलाओं से जुड़ी खबरें देखना चाहते हैं तो क्लिक करें"
+            news: "अगर आप महिलाओं से जुड़ी खबरें देखना चाहते हैं तो क्लिक करें",
+            contact: "संपर्क करें",
+            name: "नाम",
+            name1: "अपना नाम दर्ज करें",
+            email: "ईमेल",                                 
+            email1: "अपना ईमेल दर्ज करें",
+            phone: "मोबाइल नंबर",
+            phone1: "अपना मोबाइल नंबर दर्ज करें",
+            message: "संदेश",
+            message1: "अपना संदेश लिखें",
+            sendMessage: "संदेश भेजें"
         }
     };
 
@@ -229,7 +304,17 @@
         document.getElementById("futureScopeText3").innerText = content[lang].futureScopeText3;
         document.getElementById("futureScopeText4").innerText = content[lang].futureScopeText4;
         document.getElementById("news").innerText = content[lang].news;
-
+        document.getElementById("contact").innerText = content[lang].contact;
+        document.getElementById("name").innerText = content[lang].name;
+        document.getElementById("name1").innerText = content[lang].name1;
+        document.getElementById("email").innerText = content[lang].email;
+        document.getElementById("email1").innerText = content[lang].email1;
+        document.getElementById("phone").innerText = content[lang].phone;
+        document.getElementById("phone1").innerText = content[lang].phone1;
+        document.getElementById("message").innerText = content[lang].message;
+        document.getElementById("message1").innerText = content[lang].message1;
+        document.getElementById("sendMessage").innerText = content[lang].sendMessage;
+        
         document.getElementById("languageButton").innerText = isHindi ? "EN" : "हिन्दी";
     }
 

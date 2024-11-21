@@ -11,7 +11,7 @@ use Twilio\Rest\Client;
 
 // Twilio credentials
 $account_sid = 'ACe71c6b10e61c7f60ab035927786ef93b';
-$auth_token = '859ca8edaa22f980e99d9356e801cbdf';
+$auth_token = '17feb79ef216ce434e6aa9e2ad46ccc1';
 $twilio_number = '+18434201085'; 
 
 // LocationIQ API key
