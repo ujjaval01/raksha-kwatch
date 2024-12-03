@@ -1,20 +1,20 @@
 # Women Safety and Security System 🚨
 This project is a comprehensive web application designed to enhance women's safety and security by providing quick and effective tools for emergency communication and reporting incidents. Built using PHP, MySQL, HTML, CSS, and Bootstrap, the system features three main modules: Admin, User, and Police, each with unique functionalities to ensure a robust and user-friendly experience.
 
-🔑 Features <br>
-User Module <br>
+#🔑 Features <br>
+* User Module <br>
 Create Complaints: Users can submit complaints directly to the system. <br>
 SOS Button: One-tap emergency alerts with location sharing via SMS to guardians and police. <br>
 Guardian Management: Add, view, and manage guardian contacts for emergency alerts. <br>
 Complaint Status: Track the progress and resolution of submitted complaints. <br>
-Police Module <br>
+* Police Module <br>
 Complaint Management: View and update the status of complaints. <br>
 Incident Updates: Provide real-time updates for incidents reported by users. <br>
-Admin Module <br>
+* Admin Module <br>
 Manage Users: View and manage user accounts. <br>
 Manage Police: Register and manage police personnel. <br>
 View Complaints: Monitor all complaints submitted through the system. <br>
-📁 Folder Structure <br>
+* 📁 Folder Structure <br>
 Admin Files <br>
 delete_police.php <br>
 manage_police.php <br>
